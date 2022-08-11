@@ -263,3 +263,135 @@ import viteEslint from 'vite-plugin-eslint';
 
 ### stylelint
 
+Stylelint 主要专注于样式代码的规范检查，内置了 170 多个 CSS 书写规则，支持 CSS 预处理器(如 Sass、Less)，提供插件化机制以供开发者扩展规则，已经被 Google、Github 等大型团队投入使用。与 ESLint 类似，在规范检查方面，Stylelint 已经做的足够专业，而在代码格式化方面，我们仍然需要结合 Prettier 一起来使用。
+
+安装：
+``` js
+pnpm i stylelint stylelint-prettier stylelint-config-prettier stylelint-config-recess-order stylelint-config-standard stylelint-config-standard-scss -D
+
+```
+
+``` js
+// .stylelintrc.js
+module.exports = {
+  // 注册 stylelint 的 prettier 插件
+  plugins: ['stylelint-prettier'],
+  // 继承一系列规则集合
+  extends: [
+    // standard 规则集合
+    'stylelint-config-standard',
+    // standard 规则集合的 scss 版本
+    'stylelint-config-standard-scss',
+    // 样式属性顺序规则
+    'stylelint-config-recess-order',
+    // 接入 Prettier 规则
+    'stylelint-config-prettier',
+    'stylelint-prettier/recommended'
+  ],
+  // 配置 rules
+  rules: {
+    // 开启 Prettier 自动格式化功能
+    'prettier/prettier': true
+  }
+};
+
+```
+
+可以发现 Stylelint 的配置文件和 ESLint 还是非常相似的，常用的plugins、extends和rules属性在 ESLint 同样存在，并且与 ESLint 中这三个属性的功能也基本相同。
+
+接下来我们将 Stylelint 集成到项目中，回到 package.json 中，增加如下的 scripts 配置:
+
+``` js
+{
+  "scripts": {
+    // 整合 lint 命令
+    "lint": "npm run lint:script && npm run lint:style",
+    // stylelint 命令
+    "lint:style": "stylelint --fix \"src/**/*.{css,scss}\""
+  }
+}
+
+```
+
+
+当然，我们也可以直接在 Vite 中集成 Stylelint。社区中提供了 Stylelint 的 Vite 插件，实现在项目开发阶段提前暴露出样式代码的规范问题。我们来安装一下这个插件:
+
+``` js
+pnpm i @amatlash/vite-plugin-stylelint -D
+```
+
+
+然后在 Vite 配置文件中添加如下的内容:
+
+``` js
+
+import viteStylelint from '@amatlash/vite-plugin-stylelint';
+
+// 具体配置
+{
+  plugins: [
+    // 省略其它插件
+    viteStylelint({
+      // 对某些文件排除检查
+      exclude: /windicss|node_modules/
+    }),
+  ]
+}
+
+```
+
+
+### Husky + lint-staged 的 Git 提交工作流集成
+
+我们可以在代码提交的时候进行卡点检查，也就是拦截 git commit 命令，进行代码格式检查，只有确保通过格式检查才允许正常提交代码。社区中已经有了对应的工具——Husky来完成这件事情，让我们来安装一下这个工具:
+
+``` js
+pnpm i husky -D
+pnpm i -D lint-staged
+```
+
+然后初始化`npx husky install`，并将 `husky install`作为项目启动前脚本，如:
+
+``` js
+{
+  "scripts": {
+    // 会在安装 npm 依赖后自动执行
+    "postinstall": "husky install"
+  }
+}
+```
+
+添加 Husky 钩子，在终端执行如下命令:
+
+``` js
+npx husky add .husky/pre-commit "npm run lint"
+
+```
+
+执行 git commit 的时候，会首先执行 npm run lint脚本，通过 Lint 检查后才会正式提交代码记录。
+
+但是这会产生一个额外的问题: Husky 中每次执行npm run lint都对仓库中的代码进行全量检查，也就是说，即使某些文件并没有改动，也会走一次 Lint 检查，当项目代码越来越多的时候，提交的过程会越来越慢，影响开发体验。
+
+``` js
+{
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts}": [
+      "npm run lint:script",
+      "git add ."
+    ],
+    "**/*.{scss}": [
+      "npm run lint:style",
+      "git add ."
+    ]
+  }
+}
+
+```
+
+接下来我们需要在 Husky 中应用lint-stage，回到.husky/pre-commit脚本中，将原来的npm run lint换成如下脚本:
+
+``` js
+npx --no -- lint-staged
+```
+
+如此一来，我们便实现了提交代码时的增量 Lint 检查。
