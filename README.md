@@ -395,3 +395,42 @@ npx --no -- lint-staged
 ```
 
 如此一来，我们便实现了提交代码时的增量 Lint 检查。
+
+
+### commit lint
+
+安装：
+
+``` js
+pnpm i commitlint @commitlint/cli @commitlint/config-conventional -D
+
+```
+
+
+一般我们直接使用@commitlint/config-conventional规范集就可以了，它所规定的 commit 信息一般由两个部分: type 和 subject 组成，结构如下:
+
+
+``` js
+// type 指提交的类型
+// subject 指提交的摘要信息
+<type>: <subject>
+
+```
+
+常用的 type 值包括如下:
+
+* feat: 添加新功能。
+* fix: 修复 Bug。
+* chore: 一些不影响功能的更改。
+* docs: 专指文档的修改。
+* perf: 性能方面的优化。
+* refactor: 代码重构。
+* test: 添加一些测试代码等等。
+
+然后将commitlint的功能集成到Husky的钩子当中，
+``` js
+npx husky add .husky/commit-msg "npx --no-install commitlint -e $HUSKY_GIT_PARAMS"
+
+```
+
+输入一个错误的 commit 信息，commitlint 会自动抛出错误并退出
