@@ -432,5 +432,4 @@ pnpm i commitlint @commitlint/cli @commitlint/config-conventional -D
 npx husky add .husky/commit-msg "npx --no-install commitlint -e $HUSKY_GIT_PARAMS"
 
 ```
-
 输入一个错误的 commit 信息，commitlint 会自动抛出错误并退出
