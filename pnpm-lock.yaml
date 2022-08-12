@@ -36,6 +36,7 @@ specifiers:
   typescript: ^4.6.4
   vite: ^3.0.0
   vite-plugin-eslint: ^1.7.0
+  vite-svg-loader: ^3.4.0
   vue: ^3.2.37
   vue-tsc: ^0.38.4
 
@@ -78,6 +79,7 @@ devDependencies:
   typescript: 4.7.4
   vite: 3.0.4_sass@1.54.3
   vite-plugin-eslint: 1.7.0_eslint@8.21.0+vite@3.0.4
+  vite-svg-loader: 3.4.0
   vue-tsc: 0.38.9_typescript@4.7.4
 
 packages:
@@ -4360,6 +4362,13 @@ packages:
       eslint: 8.21.0
       rollup: 2.77.2
       vite: 3.0.4_sass@1.54.3
+    dev: true
+
+  /vite-svg-loader/3.4.0:
+    resolution: {integrity: sha512-xD3yb1FX+f4l9/TmsYIqyki8ncpcVsZ2gEJFh/wLuNNqt55C8OJ+JlcMWOA/Z9gRA+ylV/TA1wmJLxzZkCRqlA==}
+    dependencies:
+      '@vue/compiler-sfc': 3.2.37
+      svgo: 2.8.0
     dev: true
 
   /vite/3.0.4_sass@1.54.3:

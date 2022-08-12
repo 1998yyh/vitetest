@@ -433,3 +433,48 @@ npx husky add .husky/commit-msg "npx --no-install commitlint -e $HUSKY_GIT_PARAM
 
 ```
 输入一个错误的 commit 信息，commitlint 会自动抛出错误并退出
+
+## 资源加载
+
+而静态资源本身并不是标准意义上的模块，因此对它们的处理和普通的代码是需要区别对待的。一方面我们需要解决资源加载的问题，对 Vite 来说就是如何将静态资源解析并加载为一个 ES 模块的问题；另一方面在生产环境下我们还需要考虑静态资源的部署问题、体积问题、网络性能问题，并采取相应的方案来进行优化。
+
+### SVG 组件方式加载
+
+插件安装
+```  js
+pnpm i vite-svg-loader -D
+
+```
+
+使用方式：
+
+``` js
+<template>
+  <MyIcon />
+</template>
+
+<script setup>
+import MyIcon from './my-icon.svg'
+</script>
+```
+
+
+### JSON自动解析 
+``` js
+// vite.config.ts
+
+{
+  json: {
+    stringify: true
+  }
+}
+
+```
+
+### Web Worker 脚本
+
+引入的时候注意加上?worker后缀，相当于告诉 Vite 这是一个 Web Worker 脚本文件
+
+?url: 表示获取资源的路径，这在只想获取文件路径而不是内容的场景将会很有用。
+?raw: 表示获取资源的字符串内容，如果你只想拿到资源的原始内容，可以使用这个后缀。
+?inline: 表示资源强制内联，而不是打包成单独的文件。

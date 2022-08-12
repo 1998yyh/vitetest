@@ -51,6 +51,7 @@
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vite-plugin-eslint": "^1.7.0",
+    "vite-svg-loader": "^3.4.0",
     "vue-tsc": "^0.38.4"
   },
   "lint-staged": {

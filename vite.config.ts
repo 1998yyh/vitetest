@@ -2,6 +2,7 @@ import { defineConfig, normalizePath } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import autoprefixer from 'autoprefixer'
 import postcssPxtorem from 'postcss-pxtorem'
+import svgr from 'vite-svg-loader'
 // import tailwindcss from 'tailwindcss'
 import viteStylelint from '@amatlash/vite-plugin-stylelint'
 import viteEslint from 'vite-plugin-eslint'
@@ -13,10 +14,24 @@ import path from 'path'
 const variablePath = normalizePath(path.resolve('./src/variable.scss'))
 
 export default defineConfig({
-    plugins: [vue(), viteEslint(), viteStylelint({
-        // 对某些文件排除检查
-        exclude: /windicss|node_modules/
-    })],
+    plugins: [
+        vue(),
+        svgr(),
+        viteEslint(),
+        viteStylelint({
+            // 对某些文件排除检查
+            exclude: /windicss|node_modules/
+        })
+    ],
+    resolve: {
+        alias: {
+            '@assets': path.join(__dirname, 'src/assets')
+        }
+    },
+    // 处理JSON解析
+    json: {
+        stringify: true
+    },
     // css 相关的配置
     css: {
         preprocessorOptions: {
@@ -43,5 +58,4 @@ export default defineConfig({
             ]
         }
     }
-
 })
