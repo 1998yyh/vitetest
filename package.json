@@ -1,7 +1,7 @@
 {
   "name": "vite",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "commitizen": "^4.2.5",
+    "conventional-changelog": "^3.1.25",
+    "conventional-changelog-cli": "^2.2.2",
     "sass": "^1.54.3",
     "ts-node": "^10.9.1",
     "vue": "^3.2.37"
@@ -41,6 +44,7 @@
     "postcss": "^8.4.16",
     "postcss-pxtorem": "^6.0.0",
     "prettier": "^2.7.1",
+    "standard-version": "^9.5.0",
     "stylelint": "^14.10.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recess-order": "^3.0.0",
