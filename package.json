@@ -13,9 +13,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "commitizen": "^4.2.5",
-    "conventional-changelog": "^3.1.25",
-    "conventional-changelog-cli": "^2.2.2",
     "sass": "^1.54.3",
     "ts-node": "^10.9.1",
     "vue": "^3.2.37"
@@ -42,12 +39,16 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.16",
+    "postcss-html": "^1.5.0",
     "postcss-pxtorem": "^6.0.0",
     "prettier": "^2.7.1",
     "standard-version": "^9.5.0",
     "stylelint": "^14.10.0",
+    "stylelint-config-html": "^1.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^27.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-prettier": "^2.0.0",

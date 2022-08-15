@@ -13,9 +13,6 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .logo {
   height: 6em;
