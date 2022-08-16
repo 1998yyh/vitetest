@@ -12,11 +12,16 @@ import path from 'path'
 
 const _viteStylelint = (viteStylelint as Record<string, any>).default
 
+const isProduction = process.env.NODE_ENV === 'production'
+// 填入项目的 CDN 域名地址
+const CDN_URL = 'xxxxxx'
+
 // 全局 scss 文件的路径
 // 用 normalizePath 解决 window 下的路径问题
 const variablePath = normalizePath(path.resolve('./src/variable.scss'))
 
 export default defineConfig({
+    base: isProduction ? CDN_URL : '/',
     plugins: [
         vue(),
         svgr(),

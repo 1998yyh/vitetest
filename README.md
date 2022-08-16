@@ -495,3 +495,129 @@ import MyIcon from './my-icon.svg'
 }
 ```
 
+##  生产处理
+
+### 自定义部署域名
+
+#### 方式一（全局）
+``` js
+
+// vite.config.ts
+// 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
+const isProduction = process.env.NODE_ENV === 'production';
+// 填入项目的 CDN 域名地址
+const CDN_URL = 'xxxxxx';
+
+// 具体配置
+{
+  base: isProduction ? CDN_URL: '/'
+}
+
+// .env.development
+NODE_ENV=development
+
+// .env.production
+NODE_ENV=production
+
+```
+
+#### 方式二（局部）
+
+我们可以通过定义环境变量的方式来解决这个问题，在项目根目录新增.env文件:
+
+
+``` js
+// .env 文件
+VITE_IMG_BASE_URL=https://my-image-cdn.com
+```
+
+然后我们就可以在组件中使用这个变量了 
+
+```js
+new URL('./logo.png', import.meta.env.VITE_IMG_BASE_URL).href
+```
+
+
+### 资源压缩
+Vite 中内置的优化方案是下面这样的:
+
+如果静态资源体积 >= 4KB，则提取成单独的文件
+
+如果静态资源体积 < 4KB，则作为 base64 格式的字符串内联
+
+上述的4 KB即为提取成单文件的临界值，当然，这个临界值你可以通过build.assetsInlineLimit自行配置，如下代码所示:
+
+```js
+// vite.config.ts
+{
+  build: {
+    // 8 KB
+    assetsInlineLimit: 8 * 1024
+  }
+}
+```
+
+
+### 图片压缩
+
+
+```js
+pnpm i vite-plugin-imagemin -D
+
+//vite.config.ts
+import viteImagemin from 'vite-plugin-imagemin';
+
+{
+  plugins: [
+    // 忽略前面的插件
+    viteImagemin({
+      // 无损压缩配置，无损压缩下图片质量不会变差
+      optipng: {
+        optimizationLevel: 7
+      },
+      // 有损压缩配置，有损压缩下图片质量可能会变差
+      pngquant: {
+        quality: [0.8, 0.9],
+      },
+      // svg 优化
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox'
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false
+          }
+        ]
+      }
+    })
+  ]
+}
+
+
+```
+
+
+### 自定义拆包
+
+``` js
+pnpm i vite-plugin-chunk-split -D
+
+// vite.config.ts
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
+
+export default {
+  chunkSplitPlugin({
+    // 指定拆包策略
+    customSplitting: {
+      // 1. 支持填包名。`react` 和 `react-dom` 会被打包到一个名为`render-vendor`的 chunk 里面(包括它们的依赖，如 object-assign)
+      'react-vendor': ['vue', 'pina'],
+      // 2. 支持填正则表达式。src 中 components 和 utils 下的所有文件被会被打包为`component-util`的 chunk 中
+      'components-util': [/src\/components/, /src\/utils/]
+    }
+  })
+}
+
+```
+

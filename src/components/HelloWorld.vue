@@ -2,6 +2,8 @@
 
 defineProps<{ msg: string }>()
 
+console.log(new URL('./logo.png', import.meta.env.VITE_IMG_BASE_URL).href)
+
 </script>
 
 <template>
