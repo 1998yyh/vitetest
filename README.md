@@ -1,5 +1,9 @@
 # Vue 3 + TypeScript + Vite
 
+## 参考文档等
+1. 15个vue3生态的库
+https://javascript.plainenglish.io/15-game-changing-tools-in-vue-3-ecosystem-2998f117bae7
+
 ## 初始化
 ``` js
 pnpm create vite

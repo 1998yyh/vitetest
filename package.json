@@ -13,9 +13,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.0.18",
     "sass": "^1.54.3",
     "ts-node": "^10.9.1",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.3"
   },
   "devDependencies": {
     "@amatlash/vite-plugin-stylelint": "^1.2.0",
