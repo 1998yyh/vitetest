@@ -4,6 +4,8 @@ module.exports = {
         es2021: true
     },
     extends: [
+        'plugin:@typescript-eslint/recommended',
+        'eslint:recommended',
         'plugin:vue/vue3-essential',
         'standard'
     ],
@@ -42,6 +44,7 @@ module.exports = {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'space-before-function-paren': ['off'],
+        'vue/multi-word-component-name': 'off',
         'vue/array-bracket-spacing': 'error',
         'vue/arrow-spacing': 'error',
         'vue/block-spacing': 'error',
@@ -52,6 +55,7 @@ module.exports = {
         'vue/eqeqeq': 'error',
         'vue/key-spacing': 'error',
         'vue/match-component-file-name': 'error',
-        'vue/object-curly-spacing': 'off'
+        'vue/object-curly-spacing': 'off',
+        'no-use-before-define': 'off'
     }
 }

@@ -6,26 +6,6 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header className="App-header">
-    <img className="w-20" alt="logo" />
-    <p className="bg-red-400">Hello Vite + React!</p>
-  </header>
-  <hello-world msg="Vite + Vue" />
+
+  <hello-world />
 </template>
-
-<style scoped>
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
