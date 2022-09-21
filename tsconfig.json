@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "baseUrl": ".", // 解析非相对模块基础地址 默认是当前目录
+    "paths": {
+      "@/*":["src/*"] 
+    },
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -11,6 +15,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
+    "types": ["unplugin-vue-define-options"],
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

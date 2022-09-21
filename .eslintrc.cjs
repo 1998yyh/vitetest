@@ -3,6 +3,7 @@ module.exports = {
         browser: true,
         es2021: true
     },
+    globals: { defineOptions: 'writable' },
     extends: [
         'plugin:@typescript-eslint/recommended',
         'eslint:recommended',

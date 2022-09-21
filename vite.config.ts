@@ -6,6 +6,8 @@ import svgr from 'vite-svg-loader'
 // import tailwindcss from 'tailwindcss'
 // ! 这个家伙暴露出来的不是函数 是个对象
 import viteStylelint from '@amatlash/vite-plugin-stylelint'
+// 自动引入
+import DefineOptions from 'unplugin-vue-define-options/vite'
 import viteEslint from 'vite-plugin-eslint'
 import cssnano from 'cssnano'
 import path from 'path'
@@ -24,6 +26,7 @@ export default defineConfig({
     base: isProduction ? CDN_URL : '/',
     plugins: [
         vue(),
+        DefineOptions(),
         svgr(),
         viteEslint(),
         _viteStylelint({
@@ -33,7 +36,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@assets': path.join(__dirname, 'src/assets')
+            '@assets': path.join(__dirname, 'src/assets'),
+            '@': path.join(__dirname, 'src/')
         }
     },
     // 处理JSON解析
