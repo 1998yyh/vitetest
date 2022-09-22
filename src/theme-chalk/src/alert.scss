@@ -1,12 +1,17 @@
 @use 'sass:map';
 
-@use 'mixins/mixins' as *;
-@use 'mixins/var' as *;
-@use 'common/var' as *;
+@use 'mixins/mixins'as *;
+@use 'mixins/var'as *;
+@use 'common/var'as *;
 
 @include b(alert) {
   @include set-component-css-var('alert', $alert);
 
+  overflow: hidden;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  transition: opacity getCssVar('transition-duration', 'fast');
   width: 100%;
   padding: getCssVar('alert', 'padding');
   margin: 0;
@@ -14,11 +19,6 @@
   border-radius: getCssVar('alert', 'border-radius-base');
   position: relative;
   background-color: getCssVar('color', 'white');
-  overflow: hidden;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  transition: opacity getCssVar('transition-duration', 'fast');
 
   @include when(light) {
     .#{$namespace}-alert__close-btn {
@@ -30,6 +30,7 @@
     .#{$namespace}-alert__close-btn {
       color: getCssVar('color', 'white');
     }
+
     .#{$namespace}-alert__description {
       color: getCssVar('color', 'white');
     }
@@ -41,10 +42,8 @@
 
   @each $type in (success, info, warning, error) {
     @include m($type) {
-      @include css-var-from-global(
-        ('alert', 'bg-color'),
-        ('color', $type, 'light-9')
-      );
+      @include css-var-from-global(('alert', 'bg-color'),
+        ('color', $type, 'light-9'));
 
       &.is-light {
         background-color: getCssVar('alert', 'bg-color');
@@ -81,6 +80,7 @@
     font-size: getCssVar('alert', 'title-font-size');
     line-height: 18px;
     vertical-align: text-top;
+
     @include when(bold) {
       font-weight: bold;
     }

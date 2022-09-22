@@ -49,7 +49,8 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 // additionalData 的内容会在每个 scss 文件的开头自动注入
-                additionalData: `@import "${variablePath}";`
+                // 使用这个会影响scss的@use 规则 因为他是在第一行插入的
+                // additionalData: `@import "${variablePath}";`
             }
         },
         // 进行 PostCSS 配置

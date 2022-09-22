@@ -25,6 +25,7 @@ module.exports = {
     ],
     rules: {
         indent: [0, 4],
+        'vue/multi-word-component-names': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-extra-semi': 'off',
         '@typescript-eslint/ban-ts-comment': 'warn',
@@ -45,7 +46,6 @@ module.exports = {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'space-before-function-paren': ['off'],
-        'vue/multi-word-component-name': 'off',
         'vue/array-bracket-spacing': 'error',
         'vue/arrow-spacing': 'error',
         'vue/block-spacing': 'error',

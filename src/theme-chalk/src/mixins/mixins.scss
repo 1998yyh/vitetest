@@ -146,6 +146,8 @@
   }
 }
 
+// 这个应该只能在$E以下的层级使用
+// 加了一个 modifier
 @mixin spec-selector(
   $specSelector: '',
   $element: $E,
@@ -168,6 +170,30 @@
   }
 }
 
+
+// @include b(card) {
+
+//   @include e(footer) {
+    
+//     @include spec-selector(
+//       $specSelector: "",
+//       $element: $E,
+//       $modifier: primary,
+//       $block: $B
+//     ) {
+//       display: flex;
+//     }
+//   }
+// }
+
+// * 编译后
+// 前面的省略 只看这一行就够
+
+// .mk-card__footer.mk-card__footer--primary {
+// }
+
+
+
 @mixin meb($modifier: false, $element: $E, $block: $B) {
   $selector: &;
   $modifierCombo: '';
@@ -185,6 +211,7 @@
   }
 }
 
+// 定义一些状态样式
 @mixin when($state) {
   @at-root {
     &.#{$state-prefix + $state} {

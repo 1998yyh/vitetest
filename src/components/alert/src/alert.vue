@@ -58,10 +58,10 @@ const isBoldTitle = computed(() => {
   return { [ns.is('bold')]: props.description || slots.default }
 })
 
-const iconClass = computed(() => [
-  ns.e('icon'),
-  { [ns.is('big')]: !!props.description || !!slots.default }
-])
+// const iconClass = computed(() => [
+//   ns.e('icon'),
+//   { [ns.is('big')]: !!props.description || !!slots.default }
+// ])
 
 const close = (evt: MouseEvent) => {
   visible.value = false
@@ -69,3 +69,5 @@ const close = (evt: MouseEvent) => {
 }
 
 </script>
+<!-- <style src="../style/style.scss" lang='scss'></style> -->
+<!-- <style src="@/theme-chalk/src/alert.scss" lang='scss'></style> -->
