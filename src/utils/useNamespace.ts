@@ -1,3 +1,6 @@
+/**
+ * Element-plus bem方案
+ */
 export const defaultNamespace = 'el'
 
 const statePrefix = 'is-'
