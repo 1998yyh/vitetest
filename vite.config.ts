@@ -71,5 +71,8 @@ export default defineConfig({
             ]
         }
     },
-    assetsInclude: ['.txt']
+    assetsInclude: ['.txt'],
+    optimizeDeps: {
+        exclude: ['vue']
+    }
 })
