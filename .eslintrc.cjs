@@ -6,6 +6,7 @@ module.exports = {
     globals: { defineOptions: 'writable' },
     extends: [
         'plugin:@typescript-eslint/recommended',
+        'vue-global-api',
         'eslint:recommended',
         'plugin:vue/vue3-essential',
         'standard'

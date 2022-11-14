@@ -10,6 +10,7 @@ import viteStylelint from '@amatlash/vite-plugin-stylelint'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import viteEslint from 'vite-plugin-eslint'
 import cssnano from 'cssnano'
+import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
 const _viteStylelint = (viteStylelint as Record<string, any>).default
@@ -26,6 +27,10 @@ export default defineConfig({
     base: isProduction ? CDN_URL : '/',
     plugins: [
         vue(),
+        AutoImport({
+            imports: ['vue', 'vue-router'],
+            dts: 'src/auto-import.d.ts'
+        }),
         DefineOptions(),
         svgr(),
         viteEslint(),
